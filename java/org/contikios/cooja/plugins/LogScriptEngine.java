@@ -63,6 +63,8 @@ public class LogScriptEngine {
   private static Logger logger = Logger.getLogger(LogScriptEngine.class);
   private static final long DEFAULT_TIMEOUT = 20*60*1000*Simulation.MILLISECOND; /* 1200s = 20 minutes */
 
+
+
   private ScriptEngine engine =
     new ScriptEngineManager().getEngineByName("JavaScript");
 
@@ -105,6 +107,7 @@ public class LogScriptEngine {
   
   public LogScriptEngine(Simulation simulation) {
     this.simulation = simulation;
+    System.out.println("\n\nLogger " + logger + "\n\n");
   }
 
   /* Only called from the simulation loop */
@@ -372,7 +375,7 @@ public class LogScriptEngine {
         return;
       }
       exitCode = 2;
-      logger.info("Timeout event @ " + t);
+      //logger.info("Timeout event @ " + t);
       engine.put("TIMEOUT", true);
       stepScript();
     }
@@ -386,7 +389,7 @@ public class LogScriptEngine {
       long realDuration = System.currentTimeMillis()-startRealTime;
       double estimatedLeft = 1.0*realDuration/progress - realDuration;
       if (estimatedLeft == 0) estimatedLeft = 1;
-      logger.info(String.format("Test script at %2.2f%%, done in %2.1f sec", 100*progress, estimatedLeft/1000));
+      //logger.info(String.format("Test script at %2.2f%%, done in %2.1f sec", 100*progress, estimatedLeft/1000));
     }
   };
 
